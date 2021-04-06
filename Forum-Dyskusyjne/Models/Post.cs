@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Forum_Dyskusyjne.Models
 {
+    [Table("Post")]
     public class Post
     {
         [Key]

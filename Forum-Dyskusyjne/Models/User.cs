@@ -11,6 +11,7 @@ namespace Forum_Dyskusyjne.Models
         User
     }
 
+    [Table("User")]
     public class User
     {
         [Key]

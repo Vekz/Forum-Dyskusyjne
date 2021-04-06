@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Forum_Dyskusyjne.Models
 {
+    [Table("Category")]
     public class Category
     {
         [Key]

@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Forum_Dyskusyjne.Models
 {
+    [Table("Thread")]
     public class Thread
     {
         [Key]
@@ -11,7 +13,7 @@ namespace Forum_Dyskusyjne.Models
         public int ThreadId { get; set; }
 
         [Required]
-        public string ThreadTitle { get; set; }
+        public string ThreadTitle { get; set; } = String.Empty;
 
         public bool IsPinned { get; set; } = false;
         
