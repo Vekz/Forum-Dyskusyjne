@@ -7,6 +7,7 @@ namespace Forum_Dyskusyjne.Models
     public class Category
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CategoryId { get; set; }
         
         [Required]
@@ -14,8 +15,9 @@ namespace Forum_Dyskusyjne.Models
         
         public string Description { get; set; }
         
-        [ForeignKey("Category")]
+        [ForeignKey("ParentCategory")]
         public int ParentId { get; set; } 
+        public Category ParentCategory { get; set; }
         
         public ICollection<Category> SubCategories { get; set; }
         public ICollection<Thread> Threads { get; set; }
