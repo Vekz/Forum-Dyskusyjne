@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -7,14 +9,22 @@ namespace Forum_Dyskusyjne.Models
 {
     public class Thread
     {
-        public int Thread_ID { get; set; }
+        [Key]
+        public int ThreadId { get; set; }
 
-        public string Thread_Title { get; set; }
+        [Required]
+        public string ThreadTitle { get; set; }
 
-        public int Author_Id { get; set; }
+        [Required]
+        [ForeignKey("User")]
+        public int AuthorId { get; set; }
 
-        public bool isPinned { get; set; }
+        public bool IsPinned { get; set; } = false;
        
-        public int Category_ID { get; set; }
+        [Required]
+        [ForeignKey("Category")]
+        public int CategoryId { get; set; }
+        
+        public ICollection<Post> Posts { get; set; }
     }
 }

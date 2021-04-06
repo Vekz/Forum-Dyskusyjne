@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -14,18 +15,29 @@ namespace Forum_Dyskusyjne.Models
 
     public class User
     {
-        public int User_ID { get; set; }
-        public string User_Name { get; set; }
+        [Key]
+        public int UserId { get; set; }
+        
+        [Required]
+        public string UserName { get; set; }
 
         public byte[] Avatar { get; set; }
 
-        public string PassWordHash {get; set;}
+        [Required]
+        public string PasswordHash {get; set;}
 
+        [Required]
         public UserRole Role { get; set; }
 
-        public float Timeout { get; set; }
+        [Required] 
+        public float Timeout { get; set; } = 1800.0f; // 30min = 1800s
 
-        public string eMail { get; set; }
+        [Required]
+        public string EMail { get; set; }
                 
+        public ICollection<Thread> Threads { get; set; }
+        public ICollection<Post> Posts { get; set; }
+        
+        public ICollection<Message> Messages { get; set; }
     }
 }
