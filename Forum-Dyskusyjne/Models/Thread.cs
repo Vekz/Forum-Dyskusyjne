@@ -20,13 +20,13 @@ namespace Forum_Dyskusyjne.Models
         [Required]
         [ForeignKey("Author")]
         public int AuthorId { get; set; }
-        public User Author { get; set; }
+        public virtual User Author { get; set; }
 
         [Required]
         [ForeignKey("Category")]
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
         
-        public ICollection<Post> Posts { get; set; }
+        public virtual ICollection<Post> Posts { get; set; }
     }
 }

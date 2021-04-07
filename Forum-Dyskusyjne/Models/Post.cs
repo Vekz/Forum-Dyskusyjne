@@ -16,11 +16,11 @@ namespace Forum_Dyskusyjne.Models
         [Required]
         [ForeignKey("Author")]
         public int AuthorId { get; set; }
-        public User Author { get; set; }
+        public virtual User Author { get; set; }
         
         [Required]
         [ForeignKey("Thread")]
         public int ThreadId { get; set; }
-        public Thread Thread { get; set; }
+        public virtual Thread Thread { get; set; }
     }
 }

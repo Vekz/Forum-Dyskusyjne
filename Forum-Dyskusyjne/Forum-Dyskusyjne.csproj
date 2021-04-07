@@ -126,13 +126,12 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ThreadsController.cs" />
     <Compile Include="DAL\ForumDBContext.cs" />
-    <Compile Include="DAL\ForumInitializer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202104070839580_Initial.cs" />
-    <Compile Include="Migrations\202104070839580_Initial.Designer.cs">
-      <DependentUpon>202104070839580_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\202104071053040_Initial.cs" />
+    <Compile Include="Migrations\202104071053040_Initial.Designer.cs">
+      <DependentUpon>202104071053040_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
@@ -312,8 +311,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202104070839580_Initial.resx">
-      <DependentUpon>202104070839580_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202104071053040_Initial.resx">
+      <DependentUpon>202104071053040_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

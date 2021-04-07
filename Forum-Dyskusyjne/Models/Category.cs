@@ -18,9 +18,9 @@ namespace Forum_Dyskusyjne.Models
         
         [ForeignKey("ParentCategory")]
         public int ParentId { get; set; } 
-        public Category ParentCategory { get; set; }
+        public virtual Category ParentCategory { get; set; }
         
-        public ICollection<Category> SubCategories { get; set; }
-        public ICollection<Thread> Threads { get; set; }
+        public virtual ICollection<Category> SubCategories { get; set; }
+        public virtual ICollection<Thread> Threads { get; set; }
     }
 }

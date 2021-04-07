@@ -7,15 +7,16 @@ namespace Forum_Dyskusyjne.Models
     [Table("Message")]
     public class Message
     {
-        [Key] // If we want to have index for message without addressing users that are sender and receiver.
-        public int Message_ID { get; set; }
+        [Key]
+        public int MessageId { get; set; }
         
-
+        [ForeignKey("Sender"), Column(Order = 1)]
         public int SenderId { get; set; }
-        public User Sender { get; set; }
+        public virtual User Sender { get; set; }
         
+        [ForeignKey("Receiver"), Column(Order = 2)]
         public int ReceiverId { get; set; }
-        public User Receiver { get; set; }
+        public virtual User Receiver { get; set; }
         
         [Required]
         public string Text { get; set; }

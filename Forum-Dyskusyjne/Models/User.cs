@@ -35,9 +35,10 @@ namespace Forum_Dyskusyjne.Models
         [Required]
         public string EMail { get; set; }
                 
-        public ICollection<Thread> Threads { get; set; }
-        public ICollection<Post> Posts { get; set; }
+        public virtual ICollection<Thread> Threads { get; set; }
+        public virtual ICollection<Post> Posts { get; set; }
         
-        public ICollection<Message> Messages { get; set; }
+        public virtual ICollection<Message> MessagesSent { get; set; }
+        public virtual ICollection<Message> MessagesReceived { get; set; }
     }
 }

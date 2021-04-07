@@ -31,7 +31,7 @@
                         CategoryId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ThreadId)
-                .ForeignKey("dbo.User", t => t.AuthorId, cascadeDelete: true)
+                .ForeignKey("dbo.User", t => t.AuthorId)
                 .ForeignKey("dbo.Category", t => t.CategoryId, cascadeDelete: true)
                 .Index(t => t.AuthorId)
                 .Index(t => t.CategoryId);
@@ -54,23 +54,18 @@
                 "dbo.Message",
                 c => new
                     {
-                        Message_ID = c.Int(nullable: false, identity: true),
                         SenderId = c.Int(nullable: false),
                         ReceiverId = c.Int(nullable: false),
+                        MessageId = c.Int(nullable: false, identity: true),
                         Text = c.String(nullable: false),
                         SendDate = c.DateTime(nullable: false),
                         Seen = c.Boolean(nullable: false),
-                        Receiver_UserId = c.Int(),
-                        Sender_UserId = c.Int(),
-                        User_UserId = c.Int(),
                     })
-                .PrimaryKey(t => t.Message_ID)
-                .ForeignKey("dbo.User", t => t.Receiver_UserId)
-                .ForeignKey("dbo.User", t => t.Sender_UserId)
-                .ForeignKey("dbo.User", t => t.User_UserId)
-                .Index(t => t.Receiver_UserId)
-                .Index(t => t.Sender_UserId)
-                .Index(t => t.User_UserId);
+                .PrimaryKey(t => t.MessageId)
+                .ForeignKey("dbo.User", t => t.ReceiverId)
+                .ForeignKey("dbo.User", t => t.SenderId)
+                .Index(t => t.SenderId)
+                .Index(t => t.ReceiverId);
             
             CreateTable(
                 "dbo.Post",
@@ -80,35 +75,28 @@
                         Body = c.String(nullable: false),
                         AuthorId = c.Int(nullable: false),
                         ThreadId = c.Int(nullable: false),
-                        Thread_ThreadId = c.Int(),
                     })
                 .PrimaryKey(t => t.PostId)
-                .ForeignKey("dbo.User", t => t.AuthorId, cascadeDelete: true)
+                .ForeignKey("dbo.User", t => t.AuthorId)
                 .ForeignKey("dbo.Thread", t => t.ThreadId)
-                .ForeignKey("dbo.Thread", t => t.Thread_ThreadId)
                 .Index(t => t.AuthorId)
-                .Index(t => t.ThreadId)
-                .Index(t => t.Thread_ThreadId);
+                .Index(t => t.ThreadId);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Post", "Thread_ThreadId", "dbo.Thread");
             DropForeignKey("dbo.Thread", "CategoryId", "dbo.Category");
             DropForeignKey("dbo.Thread", "AuthorId", "dbo.User");
             DropForeignKey("dbo.Post", "ThreadId", "dbo.Thread");
             DropForeignKey("dbo.Post", "AuthorId", "dbo.User");
-            DropForeignKey("dbo.Message", "User_UserId", "dbo.User");
-            DropForeignKey("dbo.Message", "Sender_UserId", "dbo.User");
-            DropForeignKey("dbo.Message", "Receiver_UserId", "dbo.User");
+            DropForeignKey("dbo.Message", "SenderId", "dbo.User");
+            DropForeignKey("dbo.Message", "ReceiverId", "dbo.User");
             DropForeignKey("dbo.Category", "ParentId", "dbo.Category");
-            DropIndex("dbo.Post", new[] { "Thread_ThreadId" });
             DropIndex("dbo.Post", new[] { "ThreadId" });
             DropIndex("dbo.Post", new[] { "AuthorId" });
-            DropIndex("dbo.Message", new[] { "User_UserId" });
-            DropIndex("dbo.Message", new[] { "Sender_UserId" });
-            DropIndex("dbo.Message", new[] { "Receiver_UserId" });
+            DropIndex("dbo.Message", new[] { "ReceiverId" });
+            DropIndex("dbo.Message", new[] { "SenderId" });
             DropIndex("dbo.Thread", new[] { "CategoryId" });
             DropIndex("dbo.Thread", new[] { "AuthorId" });
             DropIndex("dbo.Category", new[] { "ParentId" });

@@ -13,7 +13,7 @@ namespace Forum_Dyskusyjne.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202104070839580_Initial"; }
+            get { return "202104071053040_Initial"; }
         }
         
         string IMigrationMetadata.Source
