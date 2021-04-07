@@ -28,6 +28,7 @@
                         ThreadTitle = c.String(nullable: false),
                         IsPinned = c.Boolean(nullable: false),
                         AuthorId = c.Int(nullable: false),
+                        CreatedTime = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                         CategoryId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ThreadId)
@@ -47,6 +48,7 @@
                         Role = c.Int(nullable: false),
                         Timeout = c.Single(nullable: false),
                         EMail = c.String(nullable: false),
+                        CreatedTime = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                     })
                 .PrimaryKey(t => t.UserId);
             
@@ -58,7 +60,7 @@
                         ReceiverId = c.Int(nullable: false),
                         MessageId = c.Int(nullable: false, identity: true),
                         Text = c.String(nullable: false),
-                        SendDate = c.DateTime(nullable: false),
+                        SendDate = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                         Seen = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.MessageId)
@@ -74,6 +76,7 @@
                         PostId = c.Int(nullable: false, identity: true),
                         Body = c.String(nullable: false),
                         AuthorId = c.Int(nullable: false),
+                        CreatedTime = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                         ThreadId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.PostId)

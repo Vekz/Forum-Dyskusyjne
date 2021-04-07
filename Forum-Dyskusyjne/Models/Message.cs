@@ -7,6 +7,11 @@ namespace Forum_Dyskusyjne.Models
     [Table("Message")]
     public class Message
     {
+        public Message()
+        {
+            SendDate = DateTime.UtcNow;
+        }
+        
         [Key]
         public int MessageId { get; set; }
         
@@ -21,7 +26,8 @@ namespace Forum_Dyskusyjne.Models
         [Required]
         public string Text { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        [Required]
+        [Column(TypeName = "datetime2")]
         public DateTime SendDate { get; set; }
 
         public bool Seen { get; set; } = false ;

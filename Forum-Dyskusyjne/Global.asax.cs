@@ -1,6 +1,8 @@
-﻿using System.Web.Mvc;
+﻿using System.Data.Entity;
+using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Forum_Dyskusyjne.DAL;
 
 namespace Forum_Dyskusyjne
 {
@@ -12,6 +14,7 @@ namespace Forum_Dyskusyjne
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            Database.SetInitializer(new ForumInitializer());
         }
     }
 }

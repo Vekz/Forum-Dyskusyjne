@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,6 +15,11 @@ namespace Forum_Dyskusyjne.Models
     [Table("User")]
     public class User
     {
+        public User()
+        {
+            CreatedTime = DateTime.UtcNow;
+        }
+        
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
@@ -35,6 +41,10 @@ namespace Forum_Dyskusyjne.Models
         [Required]
         public string EMail { get; set; }
                 
+        [Required]
+        [Column(TypeName = "datetime2")]
+        public DateTime CreatedTime { get; set; }
+
         public virtual ICollection<Thread> Threads { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
         

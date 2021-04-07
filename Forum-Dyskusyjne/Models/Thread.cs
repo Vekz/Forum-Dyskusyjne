@@ -8,6 +8,11 @@ namespace Forum_Dyskusyjne.Models
     [Table("Thread")]
     public class Thread
     {
+        public Thread()
+        {
+            CreatedTime = DateTime.UtcNow;
+        }
+        
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ThreadId { get; set; }
@@ -23,10 +28,14 @@ namespace Forum_Dyskusyjne.Models
         public virtual User Author { get; set; }
 
         [Required]
+        [Column(TypeName = "datetime2")]
+        public DateTime CreatedTime { get; set; }
+        
+        [Required]
         [ForeignKey("Category")]
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
-        
+
         public virtual ICollection<Post> Posts { get; set; }
     }
 }
