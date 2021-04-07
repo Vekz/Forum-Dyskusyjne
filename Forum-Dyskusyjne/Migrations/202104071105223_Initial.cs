@@ -14,7 +14,7 @@
                         CategoryId = c.Int(nullable: false, identity: true),
                         Name = c.String(nullable: false),
                         Description = c.String(),
-                        ParentId = c.Int(nullable: false),
+                        ParentId = c.Int(),
                     })
                 .PrimaryKey(t => t.CategoryId)
                 .ForeignKey("dbo.Category", t => t.ParentId)
