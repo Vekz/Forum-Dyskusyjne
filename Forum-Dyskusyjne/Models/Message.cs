@@ -16,11 +16,11 @@ namespace Forum_Dyskusyjne.Models
         public int MessageId { get; set; }
         
         [ForeignKey("Sender"), Column(Order = 1)]
-        public int SenderId { get; set; }
+        public String SenderId { get; set; }
         public virtual User Sender { get; set; }
         
         [ForeignKey("Receiver"), Column(Order = 2)]
-        public int ReceiverId { get; set; }
+        public String ReceiverId { get; set; }
         public virtual User Receiver { get; set; }
         
         [Required]

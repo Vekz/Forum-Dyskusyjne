@@ -24,7 +24,7 @@ namespace Forum_Dyskusyjne.Models
         
         [Required]
         [ForeignKey("Author")]
-        public int AuthorId { get; set; }
+        public String AuthorId { get; set; }
         public virtual User Author { get; set; }
 
         [Required]

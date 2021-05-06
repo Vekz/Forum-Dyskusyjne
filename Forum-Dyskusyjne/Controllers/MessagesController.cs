@@ -40,8 +40,8 @@ namespace Forum_Dyskusyjne.Controllers
         // GET: Messages/Create
         public ActionResult Create()
         {
-            ViewBag.ReceiverId = new SelectList(db.Users, "UserId", "UserName");
-            ViewBag.SenderId = new SelectList(db.Users, "UserId", "UserName");
+            ViewBag.ReceiverId = new SelectList(db.Users, "Id", "UserName");
+            ViewBag.SenderId = new SelectList(db.Users, "Id", "UserName");
             return View();
         }
 
@@ -59,8 +59,8 @@ namespace Forum_Dyskusyjne.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ReceiverId = new SelectList(db.Users, "UserId", "UserName", message.ReceiverId);
-            ViewBag.SenderId = new SelectList(db.Users, "UserId", "UserName", message.SenderId);
+            ViewBag.ReceiverId = new SelectList(db.Users, "Id", "UserName", message.ReceiverId);
+            ViewBag.SenderId = new SelectList(db.Users, "Id", "UserName", message.SenderId);
             return View(message);
         }
 
@@ -76,8 +76,8 @@ namespace Forum_Dyskusyjne.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ReceiverId = new SelectList(db.Users, "UserId", "UserName", message.ReceiverId);
-            ViewBag.SenderId = new SelectList(db.Users, "UserId", "UserName", message.SenderId);
+            ViewBag.ReceiverId = new SelectList(db.Users, "Id", "UserName", message.ReceiverId);
+            ViewBag.SenderId = new SelectList(db.Users, "Id", "UserName", message.SenderId);
             return View(message);
         }
 
@@ -94,8 +94,8 @@ namespace Forum_Dyskusyjne.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ReceiverId = new SelectList(db.Users, "UserId", "UserName", message.ReceiverId);
-            ViewBag.SenderId = new SelectList(db.Users, "UserId", "UserName", message.SenderId);
+            ViewBag.ReceiverId = new SelectList(db.Users, "Id", "UserName", message.ReceiverId);
+            ViewBag.SenderId = new SelectList(db.Users, "Id", "UserName", message.SenderId);
             return View(message);
         }
 

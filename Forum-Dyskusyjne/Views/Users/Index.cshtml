@@ -21,13 +21,13 @@
             @Html.DisplayNameFor(model => model.PasswordHash)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Role)
+            @Html.DisplayNameFor(model => model.Roles)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Timeout)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EMail)
+            @Html.DisplayNameFor(model => model.Email)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CreatedTime)
@@ -47,21 +47,21 @@
             @Html.DisplayFor(modelItem => item.PasswordHash)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Role)
+            @Html.DisplayFor(modelItem => item.Roles)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Timeout)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EMail)
+            @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CreatedTime)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.UserId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.UserId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.UserId })
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>
 }

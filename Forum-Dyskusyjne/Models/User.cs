@@ -2,45 +2,26 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Forum_Dyskusyjne.Models
 {
-    public enum UserRole
-    {
-        Admin,
-        Mod,
-        User
-    }
-
     [Table("User")]
-    public class User
+    public class User : IdentityUser
     {
         public User()
         {
-            CreatedTime = DateTime.UtcNow;
+            CreatedTime = DateTime.UtcNow; // Set creation date to now
+            Timeout = 1800.0f; // Set timeout to: 30min = 1800s
         }
-        
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int UserId { get; set; }
-        
-        [Required]
-        public string UserName { get; set; }
-
         public byte[] Avatar { get; set; }
 
-        [Required]
-        public string PasswordHash {get; set;}
-
-        [Required]
-        public UserRole Role { get; set; }
-
         [Required] 
-        public float Timeout { get; set; } = 1800.0f; // 30min = 1800s
+        public float Timeout { get; set; }
 
-        [Required]
-        public string EMail { get; set; }
-                
         [Required]
         [Column(TypeName = "datetime2")]
         public DateTime CreatedTime { get; set; }
@@ -50,5 +31,15 @@ namespace Forum_Dyskusyjne.Models
         
         public virtual ICollection<Message> MessagesSent { get; set; }
         public virtual ICollection<Message> MessagesReceived { get; set; }
+        
+        // Methods
+        
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
+        {
+            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
+            var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+            // Add custom user claims here
+            return userIdentity;
+        }
     }
 }

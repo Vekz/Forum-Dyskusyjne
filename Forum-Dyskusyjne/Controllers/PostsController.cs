@@ -40,7 +40,7 @@ namespace Forum_Dyskusyjne.Controllers
         // GET: Posts/Create
         public ActionResult Create()
         {
-            ViewBag.AuthorId = new SelectList(db.Users, "UserId", "UserName");
+            ViewBag.AuthorId = new SelectList(db.Users, "Id", "UserName");
             ViewBag.ThreadId = new SelectList(db.Threads, "ThreadId", "ThreadTitle");
             return View();
         }
@@ -59,7 +59,7 @@ namespace Forum_Dyskusyjne.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AuthorId = new SelectList(db.Users, "UserId", "UserName", post.AuthorId);
+            ViewBag.AuthorId = new SelectList(db.Users, "Id", "UserName", post.AuthorId);
             ViewBag.ThreadId = new SelectList(db.Threads, "ThreadId", "ThreadTitle", post.ThreadId);
             return View(post);
         }
@@ -76,7 +76,7 @@ namespace Forum_Dyskusyjne.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AuthorId = new SelectList(db.Users, "UserId", "UserName", post.AuthorId);
+            ViewBag.AuthorId = new SelectList(db.Users, "Id", "UserName", post.AuthorId);
             ViewBag.ThreadId = new SelectList(db.Threads, "ThreadId", "ThreadTitle", post.ThreadId);
             return View(post);
         }
@@ -94,7 +94,7 @@ namespace Forum_Dyskusyjne.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.AuthorId = new SelectList(db.Users, "UserId", "UserName", post.AuthorId);
+            ViewBag.AuthorId = new SelectList(db.Users, "Id", "UserName", post.AuthorId);
             ViewBag.ThreadId = new SelectList(db.Threads, "ThreadId", "ThreadTitle", post.ThreadId);
             return View(post);
         }

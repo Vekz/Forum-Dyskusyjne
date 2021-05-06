@@ -47,7 +47,7 @@ namespace Forum_Dyskusyjne.Controllers
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserId,UserName,Avatar,PasswordHash,Role,Timeout,EMail,CreatedTime")] User user)
+        public ActionResult Create([Bind(Include = "Id,UserName,Avatar,PasswordHash,Roles,Timeout,Email,CreatedTime")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace Forum_Dyskusyjne.Controllers
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserId,UserName,Avatar,PasswordHash,Role,Timeout,EMail,CreatedTime")] User user)
+        public ActionResult Edit([Bind(Include = "Id,UserName,Avatar,PasswordHash,Roles,Timeout,Email,CreatedTime")] User user)
         {
             if (ModelState.IsValid)
             {

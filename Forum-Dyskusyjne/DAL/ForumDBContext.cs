@@ -1,17 +1,22 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using Forum_Dyskusyjne.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Forum_Dyskusyjne.DAL
 {
-    public class ForumDBContext : DbContext
+    public class ForumDBContext : IdentityDbContext<User>
     {
         public ForumDBContext() : base("name=ForumDBContext")
         {
 
         }
 
-
+        public static ForumDBContext Create()
+        {
+            return new ForumDBContext();
+        }
+        
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
 
@@ -50,7 +55,6 @@ namespace Forum_Dyskusyjne.DAL
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<User> Users { get; set; }
         public DbSet<Thread> Threads { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Message> Messages { get; set; }
