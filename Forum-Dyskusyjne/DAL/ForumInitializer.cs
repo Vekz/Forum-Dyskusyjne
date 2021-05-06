@@ -20,7 +20,8 @@ namespace Forum_Dyskusyjne.DAL
             {
                 new User{UserName = "Admin", Email = "admin@example.com"},
                 new User{UserName = "Test_Mod", Email = "mod@example.com"},
-                new User{UserName = "Test_User", Email = "user@example.com"}
+                new User{UserName = "Test_User", Email = "user@example.com"},
+                new User{UserName = "This_user_doesnt_exist", Email = "NaN"}
             };
             foreach( var us in users) { // TODO: Delete it is only for test purposes
                 var result = userManager.CreateAsync(us, "Pa$$w0rd").Result;
@@ -34,7 +35,7 @@ namespace Forum_Dyskusyjne.DAL
                         case "Test_Mod":
                             userManager.AddToRole(us.Id, "Mod");
                             break;
-                        case "Test_User":
+                        default:
                             userManager.AddToRole(us.Id, "User");
                             break;
                     }

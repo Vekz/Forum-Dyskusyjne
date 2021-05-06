@@ -172,8 +172,45 @@ namespace Forum_Dyskusyjne.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    var res = await UserManager.AddToRoleAsync(user.Id, "User");
+                    if (res.Succeeded)
+                    {
+                        return RedirectToAction("Index", "Home"); // TODO: redirect user to main forum site
+                    }
+                }
+                AddErrors(result);
+            }
 
-                    return RedirectToAction("Index", "Home"); // TODO: redirect user to main forum site
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+        
+        //
+        // GET: /Account/RegisterWithoutLogin
+        [Authorize(Roles = "Admin")]
+        public ActionResult RegisterWithoutLogin()
+        {
+            return View();
+        }
+        
+        //
+        // POST: /Account/Register
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RegisterWithoutLogin(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new User { UserName = model.Nickname, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    var res = await UserManager.AddToRoleAsync(user.Id, "User");
+                    if (res.Succeeded)
+                    {
+                        return RedirectToAction("Index", "Users");
+                    }
                 }
                 AddErrors(result);
             }

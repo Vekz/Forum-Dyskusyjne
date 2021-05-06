@@ -11,6 +11,7 @@ using Forum_Dyskusyjne.Models;
 
 namespace Forum_Dyskusyjne.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class PostsController : Controller
     {
         private ForumDBContext db = new ForumDBContext();

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Forum_Dyskusyjne.Models.User>
+﻿@using Microsoft.AspNet.Identity.EntityFramework
+@model IEnumerable<Forum_Dyskusyjne.Models.User>
 
 @{
     ViewBag.Title = "Index";
@@ -47,7 +48,11 @@
             @Html.DisplayFor(modelItem => item.PasswordHash)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Roles)
+                @{
+                    var roleId = item.Roles.Single().RoleId;
+                    var roleName = ((IEnumerable<IdentityRole>)ViewBag.RoleList).Single(e => e.Id == roleId).Name;
+                }
+            @Html.DisplayFor(modelItem => roleName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Timeout)
