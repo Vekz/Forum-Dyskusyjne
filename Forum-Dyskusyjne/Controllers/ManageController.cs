@@ -64,8 +64,12 @@ namespace Forum_Dyskusyjne.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
+            var user = UserManager.FindByIdAsync(userId).Result;
             var model = new IndexViewModel
             {
+                Nickname = User.Identity.GetUserName(),
+                ThreadsCount = user.Threads.Count,
+                PostsCount = user.Posts.Count,
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),

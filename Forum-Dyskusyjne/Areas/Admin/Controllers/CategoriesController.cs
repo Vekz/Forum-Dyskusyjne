@@ -9,119 +9,115 @@ using System.Web.Mvc;
 using Forum_Dyskusyjne.DAL;
 using Forum_Dyskusyjne.Models;
 
-namespace Forum_Dyskusyjne.Controllers
+namespace Forum_Dyskusyjne.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class MessagesController : Controller
+    public class CategoriesController : Controller
     {
         private ForumDBContext db = new ForumDBContext();
 
-        // GET: Messages
+        // GET: Categories
         public ActionResult Index()
         {
-            var messages = db.Messages.Include(m => m.Receiver).Include(m => m.Sender);
-            return View(messages.ToList());
+            var categories = db.Categories.Include(c => c.ParentCategory);
+            return View(categories.ToList());
         }
 
-        // GET: Messages/Details/5
+        // GET: Categories/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Message message = db.Messages.Find(id);
-            if (message == null)
+            Category category = db.Categories.Find(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(message);
+            return View(category);
         }
 
-        // GET: Messages/Create
+        // GET: Categories/Create
         public ActionResult Create()
         {
-            ViewBag.ReceiverId = new SelectList(db.Users, "Id", "UserName");
-            ViewBag.SenderId = new SelectList(db.Users, "Id", "UserName");
+            ViewBag.ParentId = new SelectList(db.Categories, "CategoryId", "Name");
             return View();
         }
 
-        // POST: Messages/Create
+        // POST: Categories/Create
         // Aby zapewnić ochronę przed atakami polegającymi na przesyłaniu dodatkowych danych, włącz określone właściwości, z którymi chcesz utworzyć powiązania.
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MessageId,SenderId,ReceiverId,Text,SendDate,Seen")] Message message)
+        public ActionResult Create([Bind(Include = "CategoryId,Name,Description,ParentId")] Category category)
         {
             if (ModelState.IsValid)
             {
-                db.Messages.Add(message);
+                db.Categories.Add(category);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ReceiverId = new SelectList(db.Users, "Id", "UserName", message.ReceiverId);
-            ViewBag.SenderId = new SelectList(db.Users, "Id", "UserName", message.SenderId);
-            return View(message);
+            ViewBag.ParentId = new SelectList(db.Categories, "CategoryId", "Name", category.ParentId);
+            return View(category);
         }
 
-        // GET: Messages/Edit/5
+        // GET: Categories/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Message message = db.Messages.Find(id);
-            if (message == null)
+            Category category = db.Categories.Find(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ReceiverId = new SelectList(db.Users, "Id", "UserName", message.ReceiverId);
-            ViewBag.SenderId = new SelectList(db.Users, "Id", "UserName", message.SenderId);
-            return View(message);
+            ViewBag.ParentId = new SelectList(db.Categories, "CategoryId", "Name", category.ParentId);
+            return View(category);
         }
 
-        // POST: Messages/Edit/5
+        // POST: Categories/Edit/5
         // Aby zapewnić ochronę przed atakami polegającymi na przesyłaniu dodatkowych danych, włącz określone właściwości, z którymi chcesz utworzyć powiązania.
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MessageId,SenderId,ReceiverId,Text,SendDate,Seen")] Message message)
+        public ActionResult Edit([Bind(Include = "CategoryId,Name,Description,ParentId")] Category category)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(message).State = EntityState.Modified;
+                db.Entry(category).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ReceiverId = new SelectList(db.Users, "Id", "UserName", message.ReceiverId);
-            ViewBag.SenderId = new SelectList(db.Users, "Id", "UserName", message.SenderId);
-            return View(message);
+            ViewBag.ParentId = new SelectList(db.Categories, "CategoryId", "Name", category.ParentId);
+            return View(category);
         }
 
-        // GET: Messages/Delete/5
+        // GET: Categories/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Message message = db.Messages.Find(id);
-            if (message == null)
+            Category category = db.Categories.Find(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(message);
+            return View(category);
         }
 
-        // POST: Messages/Delete/5
+        // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Message message = db.Messages.Find(id);
-            db.Messages.Remove(message);
+            Category category = db.Categories.Find(id);
+            db.Categories.Remove(category);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

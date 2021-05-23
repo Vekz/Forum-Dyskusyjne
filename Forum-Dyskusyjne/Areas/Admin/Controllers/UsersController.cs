@@ -12,7 +12,7 @@ using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace Forum_Dyskusyjne.Controllers
+namespace Forum_Dyskusyjne.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class UsersController : Controller
@@ -53,7 +53,7 @@ namespace Forum_Dyskusyjne.Controllers
         // GET: Users/Create
         public ActionResult Create()
         {
-            return RedirectToAction("RegisterWithoutLogin", "Account");
+            return RedirectToAction("RegisterWithoutLogin", "Account", new { area = "" });
         }
 
         // GET: Users/Edit/5

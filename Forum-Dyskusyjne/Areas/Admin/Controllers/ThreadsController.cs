@@ -9,115 +9,119 @@ using System.Web.Mvc;
 using Forum_Dyskusyjne.DAL;
 using Forum_Dyskusyjne.Models;
 
-namespace Forum_Dyskusyjne.Controllers
+namespace Forum_Dyskusyjne.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class CategoriesController : Controller
+    public class ThreadsController : Controller
     {
         private ForumDBContext db = new ForumDBContext();
 
-        // GET: Categories
+        // GET: Threads
         public ActionResult Index()
         {
-            var categories = db.Categories.Include(c => c.ParentCategory);
-            return View(categories.ToList());
+            var threads = db.Threads.Include(t => t.Author).Include(t => t.Category);
+            return View(threads.ToList());
         }
 
-        // GET: Categories/Details/5
+        // GET: Threads/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
-            if (category == null)
+            Thread thread = db.Threads.Find(id);
+            if (thread == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(thread);
         }
 
-        // GET: Categories/Create
+        // GET: Threads/Create
         public ActionResult Create()
         {
-            ViewBag.ParentId = new SelectList(db.Categories, "CategoryId", "Name");
+            ViewBag.AuthorId = new SelectList(db.Users, "Id", "UserName");
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name");
             return View();
         }
 
-        // POST: Categories/Create
+        // POST: Threads/Create
         // Aby zapewnić ochronę przed atakami polegającymi na przesyłaniu dodatkowych danych, włącz określone właściwości, z którymi chcesz utworzyć powiązania.
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CategoryId,Name,Description,ParentId")] Category category)
+        public ActionResult Create([Bind(Include = "ThreadId,ThreadTitle,IsPinned,AuthorId,CategoryId")] Thread thread)
         {
             if (ModelState.IsValid)
             {
-                db.Categories.Add(category);
+                db.Threads.Add(thread);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ParentId = new SelectList(db.Categories, "CategoryId", "Name", category.ParentId);
-            return View(category);
+            ViewBag.AuthorId = new SelectList(db.Users, "Id", "UserName", thread.AuthorId);
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", thread.CategoryId);
+            return View(thread);
         }
 
-        // GET: Categories/Edit/5
+        // GET: Threads/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
-            if (category == null)
+            Thread thread = db.Threads.Find(id);
+            if (thread == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ParentId = new SelectList(db.Categories, "CategoryId", "Name", category.ParentId);
-            return View(category);
+            ViewBag.AuthorId = new SelectList(db.Users, "Id", "UserName", thread.AuthorId);
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", thread.CategoryId);
+            return View(thread);
         }
 
-        // POST: Categories/Edit/5
+        // POST: Threads/Edit/5
         // Aby zapewnić ochronę przed atakami polegającymi na przesyłaniu dodatkowych danych, włącz określone właściwości, z którymi chcesz utworzyć powiązania.
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CategoryId,Name,Description,ParentId")] Category category)
+        public ActionResult Edit([Bind(Include = "ThreadId,ThreadTitle,IsPinned,AuthorId,CategoryId")] Thread thread)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(category).State = EntityState.Modified;
+                db.Entry(thread).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ParentId = new SelectList(db.Categories, "CategoryId", "Name", category.ParentId);
-            return View(category);
+            ViewBag.AuthorId = new SelectList(db.Users, "Id", "UserName", thread.AuthorId);
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", thread.CategoryId);
+            return View(thread);
         }
 
-        // GET: Categories/Delete/5
+        // GET: Threads/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
-            if (category == null)
+            Thread thread = db.Threads.Find(id);
+            if (thread == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(thread);
         }
 
-        // POST: Categories/Delete/5
+        // POST: Threads/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Category category = db.Categories.Find(id);
-            db.Categories.Remove(category);
+            Thread thread = db.Threads.Find(id);
+            db.Threads.Remove(thread);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

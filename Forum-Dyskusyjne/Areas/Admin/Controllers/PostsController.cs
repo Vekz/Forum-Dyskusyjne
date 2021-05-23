@@ -9,7 +9,7 @@ using System.Web.Mvc;
 using Forum_Dyskusyjne.DAL;
 using Forum_Dyskusyjne.Models;
 
-namespace Forum_Dyskusyjne.Controllers
+namespace Forum_Dyskusyjne.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class PostsController : Controller

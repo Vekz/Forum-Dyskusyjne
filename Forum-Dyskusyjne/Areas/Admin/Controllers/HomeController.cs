@@ -1,9 +1,9 @@
 ﻿using System.Web.Mvc;
 
-namespace Forum_Dyskusyjne.Controllers
+namespace Forum_Dyskusyjne.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class AdminController : Controller
+    public class HomeController : Controller
     {
         public ActionResult Index()
         {

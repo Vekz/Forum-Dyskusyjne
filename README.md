@@ -4,9 +4,9 @@ Za jego pomocą internauci mogą tworzyć własne wątki lub dopisywać wiadomo�
 
 Funkcjonalności:
 - [ ] forum z możliwością tworzenia wątków i dopisywania wiadomości do istniejących wątków
-- [ ] rejestracja użytkowników. Profil użytkownika. Możliwość zalogowania się do systemu
-- [ ] panel administracyjny do zarządzania wiadomościami i użytkownikami
-- [ ] możliwość definiowania kategorii forów i samych forów. Funkcjonalność dostępna tylko dla
+- [x] rejestracja użytkowników. Profil użytkownika. Możliwość zalogowania się do systemu
+- [x] panel administracyjny do zarządzania wiadomościami i użytkownikami
+- [x] możliwość definiowania kategorii forów i samych forów. Funkcjonalność dostępna tylko dla
 administratora. Dane forum może należeć do dokładnie jednej kategorii
 - [ ] przydzielenie moderatorów dla każdego forum. Każde forum może mieć wielu moderatorów
 a każdy użytkownik może być moderatorem na wielu forach. Moderator ma prawo edycji i

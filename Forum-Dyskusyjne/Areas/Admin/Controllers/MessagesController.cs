@@ -9,119 +9,119 @@ using System.Web.Mvc;
 using Forum_Dyskusyjne.DAL;
 using Forum_Dyskusyjne.Models;
 
-namespace Forum_Dyskusyjne.Controllers
+namespace Forum_Dyskusyjne.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class ThreadsController : Controller
+    public class MessagesController : Controller
     {
         private ForumDBContext db = new ForumDBContext();
 
-        // GET: Threads
+        // GET: Messages
         public ActionResult Index()
         {
-            var threads = db.Threads.Include(t => t.Author).Include(t => t.Category);
-            return View(threads.ToList());
+            var messages = db.Messages.Include(m => m.Receiver).Include(m => m.Sender);
+            return View(messages.ToList());
         }
 
-        // GET: Threads/Details/5
+        // GET: Messages/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Thread thread = db.Threads.Find(id);
-            if (thread == null)
+            Message message = db.Messages.Find(id);
+            if (message == null)
             {
                 return HttpNotFound();
             }
-            return View(thread);
+            return View(message);
         }
 
-        // GET: Threads/Create
+        // GET: Messages/Create
         public ActionResult Create()
         {
-            ViewBag.AuthorId = new SelectList(db.Users, "Id", "UserName");
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name");
+            ViewBag.ReceiverId = new SelectList(db.Users, "Id", "UserName");
+            ViewBag.SenderId = new SelectList(db.Users, "Id", "UserName");
             return View();
         }
 
-        // POST: Threads/Create
+        // POST: Messages/Create
         // Aby zapewnić ochronę przed atakami polegającymi na przesyłaniu dodatkowych danych, włącz określone właściwości, z którymi chcesz utworzyć powiązania.
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ThreadId,ThreadTitle,IsPinned,AuthorId,CategoryId")] Thread thread)
+        public ActionResult Create([Bind(Include = "MessageId,SenderId,ReceiverId,Text,SendDate,Seen")] Message message)
         {
             if (ModelState.IsValid)
             {
-                db.Threads.Add(thread);
+                db.Messages.Add(message);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AuthorId = new SelectList(db.Users, "Id", "UserName", thread.AuthorId);
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", thread.CategoryId);
-            return View(thread);
+            ViewBag.ReceiverId = new SelectList(db.Users, "Id", "UserName", message.ReceiverId);
+            ViewBag.SenderId = new SelectList(db.Users, "Id", "UserName", message.SenderId);
+            return View(message);
         }
 
-        // GET: Threads/Edit/5
+        // GET: Messages/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Thread thread = db.Threads.Find(id);
-            if (thread == null)
+            Message message = db.Messages.Find(id);
+            if (message == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.AuthorId = new SelectList(db.Users, "Id", "UserName", thread.AuthorId);
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", thread.CategoryId);
-            return View(thread);
+            ViewBag.ReceiverId = new SelectList(db.Users, "Id", "UserName", message.ReceiverId);
+            ViewBag.SenderId = new SelectList(db.Users, "Id", "UserName", message.SenderId);
+            return View(message);
         }
 
-        // POST: Threads/Edit/5
+        // POST: Messages/Edit/5
         // Aby zapewnić ochronę przed atakami polegającymi na przesyłaniu dodatkowych danych, włącz określone właściwości, z którymi chcesz utworzyć powiązania.
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ThreadId,ThreadTitle,IsPinned,AuthorId,CategoryId")] Thread thread)
+        public ActionResult Edit([Bind(Include = "MessageId,SenderId,ReceiverId,Text,SendDate,Seen")] Message message)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(thread).State = EntityState.Modified;
+                db.Entry(message).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.AuthorId = new SelectList(db.Users, "Id", "UserName", thread.AuthorId);
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name", thread.CategoryId);
-            return View(thread);
+            ViewBag.ReceiverId = new SelectList(db.Users, "Id", "UserName", message.ReceiverId);
+            ViewBag.SenderId = new SelectList(db.Users, "Id", "UserName", message.SenderId);
+            return View(message);
         }
 
-        // GET: Threads/Delete/5
+        // GET: Messages/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Thread thread = db.Threads.Find(id);
-            if (thread == null)
+            Message message = db.Messages.Find(id);
+            if (message == null)
             {
                 return HttpNotFound();
             }
-            return View(thread);
+            return View(message);
         }
 
-        // POST: Threads/Delete/5
+        // POST: Messages/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Thread thread = db.Threads.Find(id);
-            db.Threads.Remove(thread);
+            Message message = db.Messages.Find(id);
+            db.Messages.Remove(message);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
