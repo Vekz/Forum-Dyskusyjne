@@ -55,5 +55,15 @@ namespace Forum_Dyskusyjne.Models
                 this.Avatar = ms.ToArray();
             }
         }
+
+        public string GetAvatar()
+        {
+            var avatar = "data:image;base64,";
+            if (Avatar != null)
+            {
+                avatar += Convert.ToBase64String(Avatar);
+            }
+            return avatar;
+        }
     }
 }

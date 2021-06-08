@@ -67,6 +67,7 @@ namespace Forum_Dyskusyjne.Controllers
             var user = UserManager.FindByIdAsync(userId).Result;
             var model = new IndexViewModel
             {
+                Avatar = user.GetAvatar(),
                 Nickname = User.Identity.GetUserName(),
                 ThreadsCount = user.Threads.Count,
                 PostsCount = user.Posts.Count,

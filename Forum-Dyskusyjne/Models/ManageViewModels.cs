@@ -7,6 +7,7 @@ namespace Forum_Dyskusyjne.Models
 {
     public class IndexViewModel
     {
+        public string Avatar { get; set; }
         public string Nickname { get; set; }
         public int ThreadsCount { get; set; }
         public int PostsCount { get; set; }

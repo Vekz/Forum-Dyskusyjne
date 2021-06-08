@@ -11,14 +11,7 @@
 {
     <div class="row border-top border-bottom">
         <div class="col-lg-2 col-md-2 col-sm-3 bg-light py-3 d-flex justify-content-center align-items-center " style="flex-direction: column">
-            @{
-                var avatar = "data:image;base64,";
-                if (@item.Author.Avatar != null)
-                {
-                    avatar += Convert.ToBase64String(@item.Author.Avatar);
-                }
-            }
-            <img src=@avatar alt="User avatar" style="height: 4rem; width: 4rem" class="border">
+            <img src=@item.Author.GetAvatar() alt="User avatar" style="height: 4rem; width: 4rem" class="border">
             <h5 class="text-truncate">@item.Author.UserName</h5>
         </div>
         <div class="col-lg-9 col-md-8 col-sm-7 py-3 text-wrap">
