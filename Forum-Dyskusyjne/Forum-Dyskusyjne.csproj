@@ -183,6 +183,7 @@
     <Compile Include="Controllers\ForumController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ThreadController.cs" />
     <Compile Include="DAL\ForumDBContext.cs" />
     <Compile Include="DAL\ForumInitializer.cs" />
     <Compile Include="Global.asax.cs">
@@ -344,8 +345,10 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Static\img\user-512.png" />
     <Content Include="Views\Account\RegisterWithoutLogin.cshtml" />
     <Content Include="Views\Forum\Index.cshtml" />
+    <Content Include="Views\Thread\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

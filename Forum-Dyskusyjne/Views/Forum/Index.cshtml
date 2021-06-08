@@ -23,7 +23,7 @@
 @foreach (var item in Model.Threads)
 {
         <tbody>
-            <tr>
+            <tr onclick="location.href = '@Url.Action("Index", "Thread",new { area = "", index=item.ThreadId })'">
                 <td>
                     <h5>@item.ThreadTitle</h5>
                     @item.Author.UserName

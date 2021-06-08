@@ -1,0 +1,32 @@
+﻿@model Forum_Dyskusyjne.Models.Thread
+
+@{
+    ViewBag.Title = @Model.ThreadTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>@Model.ThreadTitle</h3>
+<div class="container">
+@foreach (var item in Model.Posts)
+{
+    <div class="row border-top border-bottom">
+        <div class="col-1 bg-light py-3">
+            @{
+                var avatar = "data:image;base64,";
+                if (@item.Author.Avatar != null)
+                {
+                    avatar += Convert.ToBase64String(@item.Author.Avatar);
+                }
+            }
+            <img src=@avatar alt="User avatar" style="height: 4rem; width: 4rem" class="border">
+            <h5>@item.Author.UserName</h5>
+        </div>
+        <div class="col-10 py-3">
+            @item.Body
+        </div>
+        <div class="col-1 bg-light py-3 ">
+            @item.CreatedTime
+        </div>
+    </div>
+}
+</div>
