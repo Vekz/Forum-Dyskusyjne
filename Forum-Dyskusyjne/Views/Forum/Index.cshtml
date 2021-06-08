@@ -1,0 +1,41 @@
+﻿@model Forum_Dyskusyjne.Models.Category
+
+@{
+    ViewBag.Title = @Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>@Model.Name</h3>
+<table class="table table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    Thread name
+                </th>
+                <th>
+                    Posts count
+                </th>
+                <th>
+                    Last posted
+                </th>
+            </tr>
+        </thead>
+@foreach (var item in Model.Threads)
+{
+        <tbody>
+            <tr>
+                <td>
+                    <h5>@item.ThreadTitle</h5>
+                    @item.Author.UserName
+                </td>
+                <td>
+                    @item.Posts.Count
+                </td>
+                <td>
+                    @item.Posts.Last().CreatedTime;
+                </td>
+            </tr>
+        </tbody>
+    
+}
+</table>

@@ -1,4 +1,52 @@
-﻿@{
+﻿@model List<Forum_Dyskusyjne.Models.Category>
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Home";
+}
+
+
+@foreach (var item in Model)
+{   
+    <h3>@item.Name</h3>
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    Forum name
+                </th>
+                <th>
+                    Thread count
+                </th>
+                <th>
+                    Posts count
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var child in item.SubCategories)
+            {
+                <tr onclick="location.href = '@Url.Action("Index", "Forum",new { area = "", index=child.CategoryId })'">
+                    <td>
+                        <h5>@child.Name</h5>
+                        @child.Description
+                    </td>
+                    <td>
+                        @child.Threads.Count
+                    </td>
+                    <td>
+                        @{
+                            int count = 0;
+                            foreach (var thread in child.Threads)
+                            {
+                                count += thread.Posts.Count;
+                            }
+                        }
+                        @count
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br>
 }
