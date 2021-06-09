@@ -4,8 +4,14 @@
     ViewBag.Title = @Model.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="row d-flex">
+    <h3 class="col-6 justify-content-start">@Model.ParentCategory.Name / @Model.Name</h3>
+    @if(User.Identity.IsAuthenticated)
+    {
+        <a class="offset-3 col-2 mb-1 btn btn-primary justify-content-end" href='@Url.Action("MakeThread", "Forum", new { index=Model.CategoryId })'>Add thread!</a>
+    }
+</div>
 
-<h3>@Model.ParentCategory.Name / @Model.Name</h3>
 <table class="table table-striped table-hover">
         <thead class="thead-dark">
             <tr>
@@ -13,7 +19,10 @@
                     Thread name
                 </th>
                 <th>
-                    Posts count
+                    Views
+                </th>
+                <th>
+                    Posts
                 </th>
                 <th>
                     Last posted
@@ -23,16 +32,19 @@
 @foreach (var item in Model.Threads)
 {
         <tbody>
-            <tr onclick="location.href = '@Url.Action("Index", "Thread",new { area = "", index=item.ThreadId })'">
+            <tr onclick="location.href = '@Url.Action("Index", "Thread",new { index=item.ThreadId })'">
                 <td>
                     <h5>@item.ThreadTitle</h5>
                     @item.Author.UserName
                 </td>
                 <td>
+                    @item.Views
+                </td>
+                <td>
                     @item.Posts.Count
                 </td>
                 <td>
-                    @item.Posts.Last().CreatedTime;
+                    @item.Posts.Last().CreatedTime.ToLocalTime()
                 </td>
             </tr>
         </tbody>

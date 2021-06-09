@@ -1,10 +1,10 @@
-﻿@model List<Forum_Dyskusyjne.Models.Category>
+﻿@using Forum_Dyskusyjne.Models
+@model List<Forum_Dyskusyjne.Models.Category>
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Home";
 }
-
 
 @foreach (var item in Model)
 {   
@@ -16,17 +16,17 @@
                     Forum name
                 </th>
                 <th>
-                    Thread count
+                    Threads
                 </th>
                 <th>
-                    Posts count
+                    Posts
                 </th>
             </tr>
         </thead>
         <tbody>
             @foreach (var child in item.SubCategories)
             {
-                <tr onclick="location.href = '@Url.Action("Index", "Forum",new { area = "", index=child.CategoryId })'">
+                <tr onclick="location.href = '@Url.Action("Index", "Forum",new { index=child.CategoryId })'">
                     <td>
                         <h5>@child.Name</h5>
                         @child.Description

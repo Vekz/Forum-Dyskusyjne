@@ -1,0 +1,29 @@
+﻿@model Forum_Dyskusyjne.Models.MakeThreadViewModel
+
+@{
+    ViewBag.Title = "Make Thread";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("MakeThread", "Forum", FormMethod.Post, new { @class = "form-horizontal text-center", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>New post</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    @Html.LabelFor(m => m.ThreadTitle, new { @class = "col-8 control-label" })
+    <div class="form-group d-flex justify-content-center ">
+        @Html.TextBoxFor(m => m.ThreadTitle, new { @class = "form-control col-8" })
+    </div>
+    @Html.LabelFor(m => m.FirstPostContent, new { @class = "col-8 control-label" })
+    <div class="form-group d-flex justify-content-center ">
+        @Html.TextAreaFor(m => m.FirstPostContent, new { @class = "form-control col-8", @rows = "4" })
+    </div>
+    @Html.HiddenFor(m=>m.CategoryId)
+    <div class="form-group">
+        <input type="submit" value="Post it!" class="btn btn-primary" />
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

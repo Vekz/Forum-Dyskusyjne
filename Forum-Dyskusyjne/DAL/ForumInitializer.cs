@@ -67,6 +67,8 @@ namespace Forum_Dyskusyjne.DAL
             var posts = new List<Post>
             {
                 new Post {Author = users[0], Body = "TO WAŻNE!", Thread = threads[0]},
+                new Post {Author = users[1], Body = "TO ODPOWIEDŹ WAŻNA!", Thread = threads[0]},
+                new Post {Author = users[0], Body = "TO MNIEJ WAŻNE FAKTYCZNIE!", Thread = threads[0]},
                 new Post {Author = users[1], Body = "No mówiłem że zwykły", Thread = threads[1]},
                 new Post {Author = users[2], Body = "No mówiłem że zwykły", Thread = threads[2]},
                 new Post {Author = users[1], Body = "No mówiłem że też zwykły", Thread = threads[3]},

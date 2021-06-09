@@ -1,4 +1,5 @@
-﻿@model Forum_Dyskusyjne.Models.Thread
+﻿@using Forum_Dyskusyjne.Models
+@model Forum_Dyskusyjne.Models.Thread
 
 @{
     ViewBag.Title = @Model.ThreadTitle;
@@ -7,19 +8,25 @@
 
 <h3>@Model.ThreadTitle</h3>
 <div class="container">
-@foreach (var item in Model.Posts)
-{
-    <div class="row border-top border-bottom">
-        <div class="col-lg-2 col-md-2 col-sm-3 bg-light py-3 d-flex justify-content-center align-items-center " style="flex-direction: column">
-            <img src=@item.Author.GetAvatar() alt="User avatar" style="height: 4rem; width: 4rem" class="border">
-            <h5 class="text-truncate">@item.Author.UserName</h5>
+    @foreach (var item in Model.Posts)
+    {
+        <div class="row border-top border-bottom">
+            <div class="col-lg-2 col-md-2 col-sm-3 bg-light py-3 d-flex justify-content-center align-items-center " style="flex-direction: column">
+                <img src=@item.Author.GetAvatar() alt="User avatar" style="height: 4rem; width: 4rem" class="border">
+                <h5 class="text-truncate">@item.Author.UserName</h5>
+            </div>
+            <div class="col-lg-9 col-md-8 col-sm-7 py-3 text-wrap">
+                @item.Body
+            </div>
+            <div class="col-lg-1 col-md-2 col-sm-2 bg-light py-3 text-wrap d-flex justify-content-center text-center align-items-center">
+                @item.CreatedTime.ToLocalTime()
+            </div>
         </div>
-        <div class="col-lg-9 col-md-8 col-sm-7 py-3 text-wrap">
-            @item.Body
-        </div>
-        <div class="col-lg-1 col-md-2 col-sm-2 bg-light py-3 text-wrap d-flex justify-content-center text-center align-items-center">
-            @item.CreatedTime
-        </div>
-    </div>
-}
+    }
 </div>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <hr>
+    Html.RenderPartial("_MakePost", new MakePostViewModel{Content = "", ThreadId = Model.ThreadId});
+}

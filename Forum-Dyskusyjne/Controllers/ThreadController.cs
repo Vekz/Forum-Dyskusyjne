@@ -1,5 +1,9 @@
-﻿using System.Web.Mvc;
+﻿using System.Threading.Tasks;
+using System.Web.Mvc;
+using System.Web.UI;
 using Forum_Dyskusyjne.DAL;
+using Forum_Dyskusyjne.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Forum_Dyskusyjne.Controllers
 {
@@ -9,9 +13,40 @@ namespace Forum_Dyskusyjne.Controllers
 
         public ActionResult Index(int index)
         {
-            var forum = db.Threads.Find(index);
+            var thread = db.Threads.Find(index);
+            if (thread == null)
+            {
+                return View("Error");
+            }
             
-            return View(forum);
+            thread.Views++;
+            db.SaveChanges();
+            
+            return View(thread);
+        }
+
+        [ChildActionOnly]
+        [Authorize]
+        public ActionResult MakePost()
+        {
+            return PartialView("_MakePost");
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> MakePost(MakePostViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Index", db.Threads.Find(model.ThreadId));
+            }
+
+            var post = new Post { Author = db.Users.Find(User.Identity.GetUserId()), Body = model.Content, Thread = db.Threads.Find(model.ThreadId) };
+            db.Posts.Add(post);
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("Index", new {index = model.ThreadId});
         }
     }
 }

@@ -21,6 +21,8 @@ namespace Forum_Dyskusyjne.Models
         public string ThreadTitle { get; set; } = String.Empty;
 
         public bool IsPinned { get; set; } = false;
+
+        public int Views { get; set; } = 0;
         
         [Required]
         [ForeignKey("Author")]

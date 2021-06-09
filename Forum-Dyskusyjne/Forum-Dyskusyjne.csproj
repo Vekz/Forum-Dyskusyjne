@@ -193,6 +193,8 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\MakePostViewModel.cs" />
+    <Compile Include="Models\MakeThreadViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Post.cs" />
@@ -348,7 +350,9 @@
     <Content Include="Static\img\user-512.png" />
     <Content Include="Views\Account\RegisterWithoutLogin.cshtml" />
     <Content Include="Views\Forum\Index.cshtml" />
+    <Content Include="Views\Forum\MakeThread.cshtml" />
     <Content Include="Views\Thread\Index.cshtml" />
+    <Content Include="Views\Thread\_MakePost.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -360,8 +364,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
