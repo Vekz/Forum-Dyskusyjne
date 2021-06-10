@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
-using System.Web.UI;
 using Forum_Dyskusyjne.DAL;
 using Forum_Dyskusyjne.Models;
 using Microsoft.AspNet.Identity;
@@ -41,12 +40,21 @@ namespace Forum_Dyskusyjne.Controllers
             {
                 return View("Index", db.Threads.Find(model.ThreadId));
             }
+            else if (!this.TryValidateModel(model))
+            {
+                ModelState.AddModelError(nameof(MakePostViewModel.Content), "Post content contains prohibited HTML tags!");
+                return View("Index", db.Threads.Find(model.ThreadId));
+            }
 
-            var post = new Post { Author = db.Users.Find(User.Identity.GetUserId()), Body = model.Content, Thread = db.Threads.Find(model.ThreadId) };
+            var post = new Post
+            {
+                Author = db.Users.Find(User.Identity.GetUserId()), Body = model.Content,
+                Thread = db.Threads.Find(model.ThreadId)
+            };
             db.Posts.Add(post);
             await db.SaveChangesAsync();
 
-            return RedirectToAction("Index", new {index = model.ThreadId});
+            return RedirectToAction("Index", new { index = model.ThreadId });
         }
     }
 }

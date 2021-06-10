@@ -9,5 +9,8 @@ namespace Forum_Dyskusyjne.Areas.Admin.Controllers
         {
             return View();
         }
+        
+        // TODO: Create HTML Tags allowed crud
+        // TODO: Create disallowed words crud
     }
 }

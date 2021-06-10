@@ -8,7 +8,7 @@
 @using (Html.BeginForm("MakeThread", "Forum", FormMethod.Post, new { @class = "form-horizontal text-center", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>New post</h4>
+    <h4>New thread</h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     @Html.LabelFor(m => m.ThreadTitle, new { @class = "col-8 control-label" })

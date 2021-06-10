@@ -11,7 +11,7 @@ administratora. Dane forum może należeć do dokładnie jednej kategorii
 usuwania wiadomości
 - [x] proste statystyki wyświetlane na stronach: liczba zarejestrowanych użytkowników, liczba
 wątków i wiadomości dla każdego z forów, liczba odsłon i odpowiedzi dla każdego wątku
-- [ ] wątki przyklejone, wyświetlane zawsze na górze listy wątków. Wątki przyklejone może
+- [x] wątki przyklejone, wyświetlane zawsze na górze listy wątków. Wątki przyklejone może
 tworzyć tylko administrator
 - [ ] przydzielenie moderatorów dla każdego forum. Każde forum może mieć wielu moderatorów
 a każdy użytkownik może być moderatorem na wielu forach. Moderator ma prawo edycji i

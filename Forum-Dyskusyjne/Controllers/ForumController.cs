@@ -1,6 +1,4 @@
-﻿using System.Data.Entity.Validation;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Mvc;
 using Forum_Dyskusyjne.DAL;
 using Forum_Dyskusyjne.Models;
@@ -38,44 +36,35 @@ namespace Forum_Dyskusyjne.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> MakeThread(MakeThreadViewModel model)
         {
-            try
+            if (!ModelState.IsValid)
             {
-
-
-                if (!ModelState.IsValid)
-                {
-                    return View(model);
-                }
-
-                var newThread = new Thread
-                {
-                    Author = db.Users.Find(User.Identity.GetUserId()),
-                    Category = db.Categories.Find(model.CategoryId),
-                    IsPinned = false,
-                    ThreadTitle = model.ThreadTitle
-                };
-                db.Threads.Add(newThread);
-
-                var firstPost = new Post
-                {
-                    Author = db.Users.Find(User.Identity.GetUserId()),
-                    Body = model.FirstPostContent,
-                    Thread = newThread
-                };
-                db.Posts.Add(firstPost);
-                await db.SaveChangesAsync();
-
-                return RedirectToAction("Index", new { index = model.CategoryId });
+                return View(model);
             }
-            catch (DbEntityValidationException exception)
+            else if (!this.TryValidateModel(model))
             {
-                foreach (var exc in exception.EntityValidationErrors)
-                {
-                    continue;
-                }
-                
-                return RedirectToAction("Index", new { index = model.CategoryId });
+                ModelState.AddModelError(nameof(MakePostViewModel.Content), "Post content contains prohibited HTML tags!");
+                return View(model);
             }
+
+            var newThread = new Thread
+            {
+                Author = db.Users.Find(User.Identity.GetUserId()),
+                Category = db.Categories.Find(model.CategoryId),
+                IsPinned = false,
+                ThreadTitle = model.ThreadTitle
+            };
+            db.Threads.Add(newThread);
+
+            var firstPost = new Post
+            {
+                Author = db.Users.Find(User.Identity.GetUserId()),
+                Body = model.FirstPostContent,
+                Thread = newThread
+            };
+            db.Posts.Add(firstPost);
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("Index", new { index = model.CategoryId });
         }
     }
 }
