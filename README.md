@@ -26,7 +26,7 @@ wgrywanych obrazków
 pojedynczego załącznika
 - [ ] możliwość zgłoszenia wiadomości do moderacji. Zgłoszenie pokazuje się jako wiadomość u
 moderatora
-- [ ] słownik słów zakazanych. Automatyczne nieprzyjmowanie wiadomości zawierających takie
+- [x] słownik słów zakazanych. Automatyczne nieprzyjmowanie wiadomości zawierających takie
 słowa. Zarządzanie słownikiem przez administratora
 - [ ] możliwość umieszczania wiadomości w formacie HTML. Definiowanie przez
 administratora listy dozwolonych znaczników. Automatyczne usuwanie znaczników spoza

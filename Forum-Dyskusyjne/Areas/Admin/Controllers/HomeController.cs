@@ -11,6 +11,5 @@ namespace Forum_Dyskusyjne.Areas.Admin.Controllers
         }
         
         // TODO: Create HTML Tags allowed crud
-        // TODO: Create disallowed words crud
     }
 }

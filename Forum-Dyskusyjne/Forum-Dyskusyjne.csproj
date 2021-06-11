@@ -195,6 +195,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProhibitedWords.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\MessagesController.cs" />
     <Compile Include="Areas\Admin\Controllers\PostsController.cs" />
@@ -226,6 +227,7 @@
     <Compile Include="Validators\AllowWords.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\prohibitedwords.json" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Delete.cshtml" />
@@ -242,6 +244,8 @@
     <Content Include="Areas\Admin\Views\Posts\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Posts\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Posts\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ProhibitedWords\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ProhibitedWords\_AddWord.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Threads\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Threads\Delete.cshtml" />

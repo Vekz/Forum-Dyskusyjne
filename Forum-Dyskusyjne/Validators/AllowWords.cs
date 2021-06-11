@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Forum_Dyskusyjne.Areas.Admin.Controllers;
 
 namespace Forum_Dyskusyjne.Validators
 {
@@ -12,9 +13,9 @@ namespace Forum_Dyskusyjne.Validators
         {
             string content = Convert.ToString(value);
 
-            List<string> dissallowedWords = new List<string>(){"dam"}; // TODO make reading from DB
+            var disallowedWords = ProhibitedWordsController.ReadStringListFromJson(ProhibitedWordsController.JsonPath);
 
-            var res = !(dissallowedWords.Any(s =>
+            var res = !(disallowedWords.Any(s =>
                     {
                         var pattern = @"\b" + Regex.Escape(s) + @"\b";
 

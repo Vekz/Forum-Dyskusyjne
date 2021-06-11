@@ -42,7 +42,7 @@
             @Html.DisplayFor(modelItem => item.UserName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Avatar)
+            <img src=@item.GetAvatar() alt="User avatar" style="height: 4rem; width: 4rem" class="border">
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.PasswordHash)

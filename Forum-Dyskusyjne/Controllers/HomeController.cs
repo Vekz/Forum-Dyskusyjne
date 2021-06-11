@@ -14,5 +14,14 @@ namespace Forum_Dyskusyjne.Controllers
             var categories = db.Categories.Include(c => c.ParentCategory);
             return View(categories.ToList());
         }
+        
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

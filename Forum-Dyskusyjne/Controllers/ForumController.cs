@@ -66,5 +66,14 @@ namespace Forum_Dyskusyjne.Controllers
 
             return RedirectToAction("Index", new { index = model.CategoryId });
         }
+        
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }
