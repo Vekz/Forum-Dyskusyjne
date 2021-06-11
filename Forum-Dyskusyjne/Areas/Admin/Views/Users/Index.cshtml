@@ -19,9 +19,6 @@
             @Html.DisplayNameFor(model => model.Avatar)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PasswordHash)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Roles)
         </th>
         <th>
@@ -43,9 +40,6 @@
         </td>
         <td>
             <img src=@item.GetAvatar() alt="User avatar" style="height: 4rem; width: 4rem" class="border">
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PasswordHash)
         </td>
         <td>
                 @{
