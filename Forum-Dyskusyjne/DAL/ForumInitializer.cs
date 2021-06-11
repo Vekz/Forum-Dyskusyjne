@@ -6,9 +6,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Forum_Dyskusyjne.DAL
 {
-    public class ForumInitializer : DropCreateDatabaseAlways<ForumDBContext>
+    public class ForumInitializer : DropCreateDatabaseAlways<ForumDbContext>
     {
-        protected override void Seed(ForumDBContext context)
+        protected override void Seed(ForumDbContext context)
         {
             ApplicationUserManager userManager = new ApplicationUserManager(new UserStore<User>(context));
             RoleManager<IdentityRole> roleStore = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));

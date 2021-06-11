@@ -5,16 +5,16 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Forum_Dyskusyjne.DAL
 {
-    public class ForumDBContext : IdentityDbContext<User>
+    public class ForumDbContext : IdentityDbContext<User>
     {
-        public ForumDBContext() : base("name=ForumDBContext")
+        public ForumDbContext() : base("name=ForumDbContext")
         {
 
         }
 
-        public static ForumDBContext Create()
+        public static ForumDbContext Create()
         {
-            return new ForumDBContext();
+            return new ForumDbContext();
         }
         
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

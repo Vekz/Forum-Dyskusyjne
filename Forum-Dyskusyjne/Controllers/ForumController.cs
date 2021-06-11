@@ -9,7 +9,7 @@ namespace Forum_Dyskusyjne.Controllers
 {
     public class ForumController : Controller
     {
-        private ForumDBContext db = new ForumDBContext();
+        private ForumDbContext db = new ForumDbContext();
 
         public ActionResult Index(int index)
         {

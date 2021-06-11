@@ -1,7 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -87,7 +84,7 @@ namespace Forum_Dyskusyjne.Controllers
                     case SignInStatus.LockedOut:
                         return View("Lockout");
                     case SignInStatus.RequiresVerification:
-                        return RedirectToAction("SendCode", new {ReturnUrl = returnUrl, RememberMe = model.RememberMe});
+                        return RedirectToAction("SendCode", new {ReturnUrl = returnUrl, model.RememberMe});
                     case SignInStatus.Failure:
                     default:
                         ModelState.AddModelError("", "Invalid login attempt.");
@@ -175,7 +172,7 @@ namespace Forum_Dyskusyjne.Controllers
                     var res = await UserManager.AddToRoleAsync(user.Id, "User");
                     if (res.Succeeded)
                     {
-                        return RedirectToAction("Index", "Home"); // TODO: redirect user to main forum site
+                        return RedirectToAction("Index", "Home");
                     }
                 }
                 AddErrors(result);
@@ -361,7 +358,7 @@ namespace Forum_Dyskusyjne.Controllers
             {
                 return View("Error");
             }
-            return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
+            return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, model.ReturnUrl, model.RememberMe });
         }
 
         //

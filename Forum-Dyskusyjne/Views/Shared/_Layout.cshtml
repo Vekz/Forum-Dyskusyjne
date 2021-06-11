@@ -19,7 +19,7 @@
         <footer class="row">
             <p class="col-6 justify-content-start">&copy; @DateTime.Now.Year - Forum Dyskusyjne | MVC | Artur Porowski, Laura Stasiulewicz</p>
             @{
-                var db = new ForumDBContext();
+                var db = new ForumDbContext();
                 int registeredUsers = db.Users.ToArray().Length - 1; // -1 Because one user is system user
             }
             <p class="col-2 offset-4 justify-content-end">Registered users: @registeredUsers</p>

@@ -208,7 +208,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ThreadController.cs" />
-    <Compile Include="DAL\ForumDBContext.cs" />
+    <Compile Include="DAL\ForumDbContext.cs" />
     <Compile Include="DAL\ForumInitializer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

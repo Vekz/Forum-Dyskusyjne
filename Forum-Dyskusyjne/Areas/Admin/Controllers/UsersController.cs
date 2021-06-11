@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Forum_Dyskusyjne.DAL;
 using Forum_Dyskusyjne.Models;
@@ -17,7 +14,7 @@ namespace Forum_Dyskusyjne.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class UsersController : Controller
     {
-        private ForumDBContext db = new ForumDBContext();
+        private ForumDbContext db = new ForumDbContext();
         private ApplicationUserManager userManager;
         private User defaultUser;
         
@@ -127,11 +124,7 @@ namespace Forum_Dyskusyjne.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(String id)
         {
             User user = db.Users.Find(id);
-            
-            // Cleanup after deletion
-            ApplicationUserManager userManager = new ApplicationUserManager(new UserStore<User>(db));
-            
-            
+
             var postsWritten = user.Posts;
             var threadsCreated = user.Threads;
             var messagesSent = user.MessagesSent;

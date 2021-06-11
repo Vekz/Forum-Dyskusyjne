@@ -1,12 +1,8 @@
-﻿
-using System;
-using System.Data.Entity;
-using System.Data.Entity.Migrations;
-using System.Linq;
+﻿using System.Data.Entity.Migrations;
 
 namespace Forum_Dyskusyjne.Migrations
 {
-    internal sealed class Configuration : DbMigrationsConfiguration<Forum_Dyskusyjne.DAL.ForumDBContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<DAL.ForumDbContext>
     {
         public Configuration()
         {

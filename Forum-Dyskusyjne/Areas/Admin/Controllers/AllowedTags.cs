@@ -1,16 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
 using System.Web.Hosting;
 using System.Web.Mvc;
 using Forum_Dyskusyjne.Areas.Utils;
-using Forum_Dyskusyjne.Models;
-using Ganss.XSS;
-using Microsoft.AspNet.Identity;
-using Newtonsoft.Json;
-
 using FileIO = System.IO.File;
 
 namespace Forum_Dyskusyjne.Areas.Admin.Controllers
@@ -35,7 +28,7 @@ namespace Forum_Dyskusyjne.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddTag(string word)
+        public ActionResult AddTag(string word)
         {
             if (!ModelState.IsValid || String.IsNullOrWhiteSpace(word) || word.Any(Char.IsWhiteSpace))
             {
@@ -59,11 +52,6 @@ namespace Forum_Dyskusyjne.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
             if (id < 0 || id >= _allowedTags.Count)
             {
                 return HttpNotFound();

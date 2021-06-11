@@ -8,7 +8,7 @@ namespace Forum_Dyskusyjne.Controllers
 {
     public class ThreadController : Controller
     {
-        private ForumDBContext db = new ForumDBContext();
+        private ForumDbContext db = new ForumDbContext();
 
         public ActionResult Index(int index)
         {

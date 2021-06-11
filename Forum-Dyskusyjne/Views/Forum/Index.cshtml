@@ -31,7 +31,7 @@
     </thead>
     
     <tbody>
-@foreach (var item in Model.Threads.Where(m => m.IsPinned == true))
+@foreach (var item in Model.Threads.Where(m => m.IsPinned))
 {
         <tr onclick="location.href = '@Url.Action("Index", "Thread",new { index=item.ThreadId })'" class="table-primary">
             <td>

@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Forum_Dyskusyjne.DAL;
 using Forum_Dyskusyjne.Models;
@@ -14,7 +11,7 @@ namespace Forum_Dyskusyjne.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class MessagesController : Controller
     {
-        private ForumDBContext db = new ForumDBContext();
+        private ForumDbContext db = new ForumDbContext();
 
         // GET: Messages
         public ActionResult Index()
@@ -121,7 +118,7 @@ namespace Forum_Dyskusyjne.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Message message = db.Messages.Find(id);
-            db.Messages.Remove(message);
+            db.Messages.Remove(message ?? throw new InvalidOperationException());
             db.SaveChanges();
             return RedirectToAction("Index");
         }
