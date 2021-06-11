@@ -1,0 +1,42 @@
+﻿@model List<string>
+
+@{
+    ViewBag.Title = "Allowed tags";
+}
+
+<h2>Allowed tags</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Tag
+        </th>
+        <th></th>
+    </tr>
+
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        <tr>
+            <td>
+                @Model[i]
+            </td>
+            <td>
+                @using (Html.BeginForm("Delete", "AllowedTags", new { area = "Admin" }, FormMethod.Post, new { @class = "form-horizontal text-center", role = "form" })) 
+                {
+                    @Html.AntiForgeryToken()
+                    
+                    <div class="form-actions no-color">
+                        <input type="hidden" name="id" value="@i"/>
+                        <input type="submit" value="Delete" class="btn btn-default"/>
+                    </div>
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+
+<hr>
+@{
+    Html.RenderPartial("_AddTag");
+}

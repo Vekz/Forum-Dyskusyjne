@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Hosting;
 using System.Web.Mvc;
+using Forum_Dyskusyjne.Areas.Utils;
 using Forum_Dyskusyjne.Models;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
@@ -17,7 +18,7 @@ namespace Forum_Dyskusyjne.Areas.Admin.Controllers
     public class ProhibitedWordsController : Controller
     {
         public static readonly string JsonPath = HostingEnvironment.MapPath("~/App_Data/prohibitedwords.json");
-        private static List<string> _prohibitedWords = ReadStringListFromJson(JsonPath);
+        private static List<string> _prohibitedWords = JsonUtils.ReadStringListFromJson(JsonPath);
 
         // GET: ProhibitedWords
         public ActionResult Index()
@@ -47,12 +48,12 @@ namespace Forum_Dyskusyjne.Areas.Admin.Controllers
             }
 
             _prohibitedWords.Add(word);
-            saveListToJson(JsonPath, _prohibitedWords);
+            JsonUtils.SaveListToJson(JsonPath, _prohibitedWords);
 
             return RedirectToAction("Index", "ProhibitedWords", new{ area = "Admin" });
         }
 
-        // POST: Messages/Delete/5
+        // POST: ProhibitedWords/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -68,32 +69,9 @@ namespace Forum_Dyskusyjne.Areas.Admin.Controllers
             }
 
             _prohibitedWords.RemoveAt(id);
-            saveListToJson(JsonPath, _prohibitedWords);
+            JsonUtils.SaveListToJson(JsonPath, _prohibitedWords);
             
             return RedirectToAction("Index");
-        }
-
-        public static List<string> ReadStringListFromJson(string path)
-        {
-            List<string> stringList;
-            if (FileIO.Exists(path))
-            {
-                var fileContent = FileIO.ReadAllText(path).Replace("\r\n", string.Empty);
-                var json = JsonConvert.DeserializeObject<List<string>>(fileContent);
-                stringList = json;
-            }
-            else
-            {
-                FileIO.Create(path);
-                stringList = new List<string>();
-            }
-
-            return stringList;
-        }
-
-        private void saveListToJson(string path, List<string> data)
-        {
-            FileIO.WriteAllText(path, JsonConvert.SerializeObject(data, Formatting.Indented));
         }
     }
 }

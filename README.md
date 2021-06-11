@@ -28,6 +28,6 @@ pojedynczego załącznika
 moderatora
 - [x] słownik słów zakazanych. Automatyczne nieprzyjmowanie wiadomości zawierających takie
 słowa. Zarządzanie słownikiem przez administratora
-- [ ] możliwość umieszczania wiadomości w formacie HTML. Definiowanie przez
+- [x] możliwość umieszczania wiadomości w formacie HTML. Definiowanie przez
 administratora listy dozwolonych znaczników. Automatyczne usuwanie znaczników spoza
 listy

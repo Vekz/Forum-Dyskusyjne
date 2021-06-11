@@ -195,12 +195,14 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AllowedTags.cs" />
     <Compile Include="Areas\Admin\Controllers\ProhibitedWords.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\MessagesController.cs" />
     <Compile Include="Areas\Admin\Controllers\PostsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThreadsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Utils\JsonUtils.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ForumController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -227,7 +229,10 @@
     <Compile Include="Validators\AllowWords.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\allowedtags.json" />
     <Content Include="App_Data\prohibitedwords.json" />
+    <Content Include="Areas\Admin\Views\AllowedTags\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AllowedTags\_AddTag.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Delete.cshtml" />
@@ -377,6 +382,7 @@
     <Content Include="Views\Account\RegisterWithoutLogin.cshtml" />
     <Content Include="Views\Forum\Index.cshtml" />
     <Content Include="Views\Forum\MakeThread.cshtml" />
+    <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\Thread\Index.cshtml" />
     <Content Include="Views\Thread\_MakePost.cshtml" />
     <Content Include="Web.config" />

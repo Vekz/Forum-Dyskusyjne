@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Forum_Dyskusyjne.Areas.Admin.Controllers;
+using Forum_Dyskusyjne.Areas.Utils;
 
 namespace Forum_Dyskusyjne.Validators
 {
@@ -13,7 +14,7 @@ namespace Forum_Dyskusyjne.Validators
         {
             string content = Convert.ToString(value);
 
-            var disallowedWords = ProhibitedWordsController.ReadStringListFromJson(ProhibitedWordsController.JsonPath);
+            var disallowedWords = JsonUtils.ReadStringListFromJson(ProhibitedWordsController.JsonPath);
 
             var res = !(disallowedWords.Any(s =>
                     {

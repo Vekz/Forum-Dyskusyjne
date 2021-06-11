@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using System.Web.WebPages;
+using Forum_Dyskusyjne.Areas.Admin.Controllers;
+using Forum_Dyskusyjne.Areas.Utils;
 using Forum_Dyskusyjne.Validators;
 using Ganss.XSS;
 
@@ -22,6 +24,8 @@ namespace Forum_Dyskusyjne.Models
             {
                 // Sanitizing html input with using https://github.com/mganss/HtmlSanitizer (which default rules are great)
                 var sanitizer = new HtmlSanitizer();
+                sanitizer.AllowedTags.Clear();
+                sanitizer.AllowedTags.UnionWith(JsonUtils.ReadStringListFromJson(AllowedTagsController.JsonPath));
                 var body = sanitizer.Sanitize(value);
                 if (body.IsEmpty())
                 {
