@@ -15,6 +15,7 @@ namespace Forum_Dyskusyjne.Models
         [Key]
         public int MessageId { get; set; }
         
+        
         [ForeignKey("Sender"), Column(Order = 1)]
         public String SenderId { get; set; }
         public virtual User Sender { get; set; }
@@ -22,6 +23,11 @@ namespace Forum_Dyskusyjne.Models
         [ForeignKey("Receiver"), Column(Order = 2)]
         public String ReceiverId { get; set; }
         public virtual User Receiver { get; set; }
+
+        public String OrginalSender { get; set; }
+
+        public String OrginalReciver { get; set; }
+
         
         [Required]
         public string Text { get; set; }

@@ -3,6 +3,11 @@ using System.Web.Mvc;
 using Forum_Dyskusyjne.DAL;
 using Forum_Dyskusyjne.Models;
 using Microsoft.AspNet.Identity;
+using System.Linq;
+using System.Collections;
+using System;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 
 namespace Forum_Dyskusyjne.Controllers
 {
@@ -12,7 +17,7 @@ namespace Forum_Dyskusyjne.Controllers
 
         public ActionResult Index(int index)
         {
-            var thread = db.Threads.Find(index);
+            Thread thread = db.Threads.Find(index);
             if (thread == null)
             {
                 return View("Error");
@@ -58,8 +63,37 @@ namespace Forum_Dyskusyjne.Controllers
         }
 
 
+        [Authorize]
+        public async Task<ActionResult> Report(int threadID , int postID)
+        {
+            var ModRoleID = db.Roles.Where(r => r.Name.Equals("Mod")).Single().Id;
+            List<User> mods = db.Users.Where(u => u.Roles.FirstOrDefault().RoleId == ModRoleID).ToList(); ;
+            User reportee = db.Users.Find(User.Identity.GetUserId());
+            string title = "Report by user: " + User.Identity.GetUserName() + " on thread:" + db.Threads.Find(threadID).ThreadTitle;
+            string content = " Link do wątku: " +  Url.Action("Index", new { index = threadID }) +"\n" + "Treść postu: " + db.Posts.Find(postID).Body;
+            foreach (User mod in mods)
+            {
+                Message report = new Message()
+                {
+                    SendDate = DateTime.Now,
+                    Sender = reportee,
+                    Title = title,
+                    Text = content,
+                    Receiver = mod,
+                    OrginalSender = reportee.UserName,
+                    OrginalReciver = mod.UserName,
+                    Seen = false,
 
-        
+                };
+                db.Messages.Add(report);
+            }
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("Index", new { index = threadID });
+        }
+
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

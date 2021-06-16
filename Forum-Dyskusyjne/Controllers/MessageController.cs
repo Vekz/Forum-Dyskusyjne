@@ -52,14 +52,16 @@ namespace Forum_Dyskusyjne.Controllers
                 }
 
             }
-
+            User us = db.Users.Find(User.Identity.GetUserId());
             Message mess = new Message()
             {
                 SendDate = DateTime.Now.ToLocalTime(),
-                Sender = db.Users.Find(User.Identity.GetUserId()),
+                Sender = us,
                 Receiver = reciver,
                 Seen = false,
                 Text = messageModel.Content,
+                OrginalReciver = reciver.UserName,
+                OrginalSender = us.UserName,
                 Title = messageModel.Title,
             };
 
@@ -76,8 +78,16 @@ namespace Forum_Dyskusyjne.Controllers
             Message message = db.Messages.Find(id);
             if(message != null)
             {
-                db.Messages.Remove(message);
-            }
+                if (message.ReceiverId == User.Identity.GetUserId())
+                {
+                    message.ReceiverId = db.Users.Where(u => u.UserName.Equals("This_user_doesnt_exist")).Single().Id;
+
+                }else if(message.SenderId == User.Identity.GetUserId())
+                {
+                    message.SenderId = db.Users.Where(u => u.UserName.Equals("This_user_doesnt_exist")).Single().Id;
+
+                }
+            }   
             await db.SaveChangesAsync();
 
             return RedirectToAction("Index", new { UserID = User.Identity.GetUserId() });
