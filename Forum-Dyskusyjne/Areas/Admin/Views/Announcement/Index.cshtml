@@ -1,0 +1,19 @@
+﻿
+
+@{
+    ViewBag.Title = "Ogłoszenie";
+}
+
+<h2>Prohibited words</h2>
+
+<table class="table">
+    <h4>Ogłoszenie</h4>
+    <div> @ViewBag.content</div>
+               
+  
+</table>
+
+<hr>
+@{
+    Html.RenderPartial("AddAnnouncement");
+}

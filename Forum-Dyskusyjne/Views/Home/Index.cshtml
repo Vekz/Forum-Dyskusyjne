@@ -1,8 +1,17 @@
-﻿@model List<Forum_Dyskusyjne.Models.Category>
+﻿@using  Forum_Dyskusyjne.Areas.Utils
+@using Forum_Dyskusyjne.Areas.Admin.Controllers
+@model List<Forum_Dyskusyjne.Models.Category>
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Home";
+}
+
+@{if (JsonUtils.ReadStringFromJson(AnnouncementController.JsonPath) != null)
+  {
+    <h4 class="text-center" >Ogłoszenie administracji</h4>
+    <h5 class="text-danger align-content-center text-center">@JsonUtils.ReadStringFromJson(AnnouncementController.JsonPath)</h5>
+  }
 }
 
 @foreach (var item in Model)

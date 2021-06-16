@@ -15,7 +15,7 @@ wątków i wiadomości dla każdego z forów, liczba odsłon i odpowiedzi dla ka
 tworzyć tylko administrator – 2 pkt.
 - [ ] przydzielenie moderatorów dla każdego forum. Każde forum może mieć wielu moderatorów
 a każdy użytkownik może być moderatorem na wielu forach. Moderator ma prawo edycji i usuwania wiadomości – 4 pkt.
-- [ ] ogłoszenia administracyjne wyświetlane na stronie głównej forum – 2 pkt.
+- [x] ogłoszenia administracyjne wyświetlane na stronie głównej forum – 2 pkt.
 - [x] wysyłanie wiadomości prywatnych pomiędzy użytkownikami. Możliwość odczytu i
 usunięcia wiadomości po zalogowaniu – 2 pkt.
 - [ ] automatyczne wylogowanie po ustalonym w profilu czasie braku aktywności – 2 pkt.
