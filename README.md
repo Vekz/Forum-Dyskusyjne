@@ -16,7 +16,7 @@ tworzyć tylko administrator – 2 pkt.
 - [ ] przydzielenie moderatorów dla każdego forum. Każde forum może mieć wielu moderatorów
 a każdy użytkownik może być moderatorem na wielu forach. Moderator ma prawo edycji i usuwania wiadomości – 4 pkt.
 - [ ] ogłoszenia administracyjne wyświetlane na stronie głównej forum – 2 pkt.
-- [ ] wysyłanie wiadomości prywatnych pomiędzy użytkownikami. Możliwość odczytu i
+- [x] wysyłanie wiadomości prywatnych pomiędzy użytkownikami. Możliwość odczytu i
 usunięcia wiadomości po zalogowaniu – 2 pkt.
 - [ ] automatyczne wylogowanie po ustalonym w profilu czasie braku aktywności – 2 pkt.
 - [ ] awatary w profilu użytkownika. Ograniczenie na rozdzielczość i wielkość (w kB)
@@ -24,7 +24,7 @@ wgrywanych obrazków – 2 pkt.
 - [ ] wyszukiwanie według słów kluczowych w treściach wiadomości z danego forum – 2 pkt.
 - [ ] dołączanie załączników do wiadomości. Ograniczenie liczby załączników i wielkości
 pojedynczego załącznika – 2 pkt.
-- [ ] możliwość zgłoszenia wiadomości do moderacji. Zgłoszenie pokazuje się jako wiadomość u
+- [x] możliwość zgłoszenia wiadomości do moderacji. Zgłoszenie pokazuje się jako wiadomość u
 moderatora – 2 pkt.
 - [x] słownik słów zakazanych. Automatyczne nieprzyjmowanie wiadomości zawierających takie
 słowa. Zarządzanie słownikiem przez administratora – 4 pkt.
