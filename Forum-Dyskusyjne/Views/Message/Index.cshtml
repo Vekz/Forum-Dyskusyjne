@@ -50,19 +50,19 @@
             <img src=@m.Receiver.GetAvatar() alt="User avatar" style="height: 4rem; width: 4rem" class="border">
             <h5 class="text-truncate">@m.OrginalReciver</h5>
         </div>
-        <div class="col-lg-7 col-md-7 col-sm-6 py-3 text-wrap">
+        <div class="col-lg-8 col-md-7 col-sm-6 py-3 text-wrap">
             <h6>@m.Title</h6>
             @Html.Raw(m.Text)
         </div> 
-        <div class="col-lg-3 col-md-3 col-sm-3 bg-light py-3 text-wrap d-flex justify-content-center text-center align-items-center">
+        <div class="col-lg-2 col-md-3 col-sm-4 bg-light py-3 text-wrap d-flex justify-content-center text-center align-items-center">
             @m.SendDate.ToLocalTime()
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
 
-                <div class="form-actions no-color">
+                <button class="form-actions no-color" tooltip ="Delete Message">
                     @Html.ActionLink("♻", "Delete", new { id = m.MessageId })
-                </div>
+                </button>
             }
         </div>
     </div>

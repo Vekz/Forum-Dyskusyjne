@@ -66,12 +66,12 @@ namespace Forum_Dyskusyjne.Controllers
         [Authorize]
         public async Task<ActionResult> Report(int threadID , int postID)
         {
-            var ModRoleID = db.Roles.Where(r => r.Name.Equals("Mod")).Single().Id;
-            List<User> mods = db.Users.Where(u => u.Roles.FirstOrDefault().RoleId == ModRoleID).ToList(); ;
+            var AdminRoleID = db.Roles.Where(r => r.Name.Equals("Admin")).Single().Id;
+            List<User> admins = db.Users.Where(u => u.Roles.FirstOrDefault().RoleId == AdminRoleID).ToList(); ;
             User reportee = db.Users.Find(User.Identity.GetUserId());
             string title = "Report by user: " + User.Identity.GetUserName() + " on thread:" + db.Threads.Find(threadID).ThreadTitle;
-            string content = " Link do wątku: " +  Url.Action("Index", new { index = threadID }) +"\n" + "Treść postu: " + db.Posts.Find(postID).Body;
-            foreach (User mod in mods)
+            string content = " Link do wątku: " +  Url.Action("Details", "Threads",new { area = "Admin", id = postID }) +"\n" + "Treść postu: " + db.Posts.Find(postID).Body;
+            foreach (User adm in admins)
             {
                 Message report = new Message()
                 {
@@ -79,11 +79,10 @@ namespace Forum_Dyskusyjne.Controllers
                     Sender = reportee,
                     Title = title,
                     Text = content,
-                    Receiver = mod,
+                    Receiver = adm,
                     OrginalSender = reportee.UserName,
-                    OrginalReciver = mod.UserName,
+                    OrginalReciver = adm.UserName,
                     Seen = false,
-
                 };
                 db.Messages.Add(report);
             }

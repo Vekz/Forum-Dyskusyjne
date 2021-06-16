@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace Forum_Dyskusyjne.Controllers
 {
+    [Authorize]
     public class MessageController : Controller
     {
 
@@ -18,6 +19,10 @@ namespace Forum_Dyskusyjne.Controllers
         // GET: Message
         public ActionResult Index(string UserID)
         {
+            if (UserID != User.Identity.GetUserId())
+            {
+                return View("Error");
+            }
             return View(new MessageViewModel(UserID));
         }
 
@@ -48,9 +53,7 @@ namespace Forum_Dyskusyjne.Controllers
                 else
                 {
                     throw;
-
                 }
-
             }
             User us = db.Users.Find(User.Identity.GetUserId());
             Message mess = new Message()
