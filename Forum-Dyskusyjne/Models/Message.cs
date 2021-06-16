@@ -27,6 +27,10 @@ namespace Forum_Dyskusyjne.Models
         public string Text { get; set; }
 
         [Required]
+        [MaxLength(120)]
+        public string Title { get; set; }
+
+        [Required]
         [Column(TypeName = "datetime2")]
         public DateTime SendDate { get; set; }
 

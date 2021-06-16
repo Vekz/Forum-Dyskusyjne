@@ -326,6 +326,12 @@ namespace Forum_Dyskusyjne.Controllers
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
 
+       // [ValidateAntiForgeryToken]
+        public async Task<ActionResult> GoToMessages()
+        {
+            return RedirectToAction("Index", "Message", new { UserID = User.Identity.GetUserId() });
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)

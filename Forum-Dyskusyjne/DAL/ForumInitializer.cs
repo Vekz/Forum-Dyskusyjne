@@ -79,8 +79,8 @@ namespace Forum_Dyskusyjne.DAL
             
             var messages = new List<Message>
             {
-                new Message {Receiver = users[2], Sender = users[1], Seen = true, Text = "Mam dla Ciebie ważną wiadomość"},
-                new Message {Receiver = users[1], Sender = users[2], Seen = false, Text = "Ja ważniejszą!"},
+                new Message {Receiver = users[2], Sender = users[1], Seen = true, Text = "Mam dla Ciebie ważną wiadomość", Title = "Ważne!!"},
+                new Message {Receiver = users[1], Sender = users[2], Seen = false, Text = "Ja ważniejszą!", Title = "Ważniejsze!!"},
             };
             messages.ForEach(m => context.Messages.Add(m));
             context.SaveChanges();
